@@ -8,7 +8,7 @@ open System.Runtime.CompilerServices
 [<AssemblyConfiguration("")>]
 [<AssemblyCompany("")>]
 [<AssemblyProduct("")>]
-[<AssemblyCopyright("adrianstevens")>]
+[<AssemblyCopyright("Copyright (c) 2018 Xamarin Inc., Microsoft.")>]
 [<AssemblyTrademark("")>]
 [<AssemblyVersion("1.0.0.0")>]
 ()

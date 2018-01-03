@@ -13,7 +13,7 @@ module AssemblyInfo =
   [<assembly: AssemblyConfiguration("")>]
   [<assembly: AssemblyCompany("")>]
   [<assembly: AssemblyProduct("")>]
-  [<assembly: AssemblyCopyright("")>]
+  [<assembly: AssemblyCopyright("Copyright (c) 2018 Xamarin Inc., Microsoft.")>]
   [<assembly: AssemblyTrademark("")>]
   [<assembly: AssemblyCulture("")>]
 
