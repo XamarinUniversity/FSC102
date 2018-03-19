@@ -3,58 +3,56 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{049B10B1-9678-4094-AB0B-76CA45752592}</ProjectGuid>
+    <ProjectGuid>{AB01E73C-0A8A-4C0D-B966-566545D8D262}</ProjectGuid>
+    <UseStandardResourceNames>true</UseStandardResourceNames>
     <OutputType>Exe</OutputType>
     <RootNamespace>Apitron</RootNamespace>
     <AssemblyName>Apitron</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <Tailcalls>false</Tailcalls>
+    <ExternalConsole>true</ExternalConsole>
     <PlatformTarget>x86</PlatformTarget>
-    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <DebugSymbols>false</DebugSymbols>
-    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
+    <DefineConstants></DefineConstants>
     <ErrorReport>prompt</ErrorReport>
+    <ExternalConsole>true</ExternalConsole>
+    <GenerateTailCalls>true</GenerateTailCalls>
     <PlatformTarget>x86</PlatformTarget>
-    <Externalconsole>true</Externalconsole>
-    <Tailcalls>true</Tailcalls>
   </PropertyGroup>
   <PropertyGroup>
     <FSharpTargetsPath>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets</FSharpTargetsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '10.0' OR '$(VisualStudioVersion)' == '11.0'">
+    <FSharpTargetsPath>$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets</FSharpTargetsPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
-    <Reference Include="Apitron.Image2Pdf">
-      <HintPath>packages\Apitron.Image2PDF.2.0.0.0\lib\net40\Apitron.Image2Pdf.dll</HintPath>
+    <Reference Include="System.ValueTuple">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="FSharp.Core">
-      <HintPath>packages\FSharp.Core.3.1.2.5\lib\net40\FSharp.Core.dll</HintPath>
+      <HintPath>..\packages\FSharp.Core.4.1.0.2\lib\net45\FSharp.Core.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MonkeyPictures\" />
+    <Reference Include="Apitron.Image2Pdf">
+      <HintPath>..\packages\Apitron.Image2PDF.2.0.0.0\lib\net40\Apitron.Image2Pdf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Program.fs" />
     <None Include="packages.config" />
-    <None Include="MonkeyPictures\allthemonkeys.jpg" />
-    <None Include="MonkeyPictures\f# monkey.png" />
-    <None Include="MonkeyPictures\Moar monkeys.png" />
-    <None Include="MonkeyPictures\nom.png" />
   </ItemGroup>
   <Import Project="$(FSharpTargetsPath)" />
 </Project>

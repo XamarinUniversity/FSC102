@@ -9,30 +9,30 @@ open Android.Runtime
 open Android.Views
 open Android.Widget
 
-[<Activity (Label = "F# Todo", Theme = "@android:style/Theme.Holo.Light", MainLauncher = true)>]
-type MainActivity () =
-    inherit Activity ()
+[<Activity(Label = "F# Todo", Theme = "@android:style/Theme.Holo.Light", Icon = "@mipmap/icon", MainLauncher = true)>]
+type MainActivity() =
+    inherit Activity()
 
     member val items : List<TodoItem> = new List<TodoItem>() with get, set
 
     member this.GetMainListView() = 
-        this.FindViewById<ListView>(Resource_Id.allItems)
+        this.FindViewById<ListView>(Resources.Id.allItems)
 
-    member this.UpdateData (listView : ListView) = 
+    member this.UpdateData(listView : ListView) = 
         this.items <- App.ItemManager.GetItems()
         let adapter = new ArrayAdapter<TodoItem>(this, Android.Resource.Layout.SimpleListItem1, this.items)
         this.GetMainListView().Adapter <- adapter
 
-    override this.OnCreate (bundle) =
+    override this.OnCreate(bundle) =
 
-        base.OnCreate (bundle)
+        base.OnCreate(bundle)
 
-        this.SetContentView (Resource_Layout.Main)
+        this.SetContentView(Resources.Layout.Main)
 
-        let taskName = this.FindViewById<EditText>(Resource_Id.taskName)
-        let addButton = this.FindViewById<Button>(Resource_Id.addButton)
-        let errorMessage = this.FindViewById<TextView>(Resource_Id.errorMessage)
-        let allItems = this.FindViewById<ListView>(Resource_Id.allItems)
+        let taskName = this.FindViewById<EditText>(Resources.Id.taskName)
+        let addButton = this.FindViewById<Button>(Resources.Id.addButton)
+        let errorMessage = this.FindViewById<TextView>(Resources.Id.errorMessage)
+        let allItems = this.FindViewById<ListView>(Resources.Id.allItems)
 
         allItems.ItemClick.Add(fun args -> 
             let selectedItem = this.items.[args.Position]

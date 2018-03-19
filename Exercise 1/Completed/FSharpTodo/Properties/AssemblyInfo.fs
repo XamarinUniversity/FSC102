@@ -1,4 +1,6 @@
 ﻿namespace FSharpTodo
+type Resources = FSharpTodo.Resource
+
 module AssemblyInfo =
 
   open System.Reflection
@@ -30,5 +32,4 @@ module AssemblyInfo =
   //[<assembly: AssemblyKeyFile("")>]
 
   ()
-
 

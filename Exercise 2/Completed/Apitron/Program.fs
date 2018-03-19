@@ -1,11 +1,14 @@
-﻿open System.IO
+﻿// Learn more about F# at http://fsharp.org
+// See the 'F# Tutorial' project for more help.
+
+open System.IO
 open Apitron.Image2Pdf
 
 [<EntryPoint>]
 let main argv = 
     printfn "%A" argv
 
-    let directory = __SOURCE_DIRECTORY__ + @"/MonkeyPictures/"
+    let directory = __PATH_TO_CLONED_EXERCISE_FOLDER__ + @"Assets/MonkeyPictures/"
 
     let images = Directory.GetFiles directory
     //optionally, create a filtered array with only png/jpg files
@@ -20,4 +23,3 @@ let main argv =
     document.Save(directory + "MonkeyPictures.pdf")
 
     0 // return an integer exit code
-

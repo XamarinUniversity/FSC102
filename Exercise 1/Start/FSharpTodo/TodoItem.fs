@@ -23,25 +23,25 @@ type ToDoItemManager() =
         let fullPath = IO.Path.Combine(folder, "todoitems.db3")
 
         let conn = new SQLiteConnection(fullPath, true) 
-        let table = conn.CreateTable<TodoItem> ()
+        let table = conn.CreateTable<TodoItem>()
 
         conn
 
     member this.connection : SQLiteConnection = this.GetConnection() 
 
-    member this.AddItem (name) = 
+    member this.AddItem(name) = 
         let item = new TodoItem(Name = name)
         let recordsAffected = this.connection.Insert(item)
 
         item
 
-    member this.UpdateItem (item) =
+    member this.UpdateItem(item) =
         this.connection.Update(item) 
 
-    member this.DeleteItem (item) = 
+    member this.DeleteItem(item) = 
         this.connection.Delete(item)
 
-    member this.GetItems () = 
+    member this.GetItems() = 
         this.connection.Table<TodoItem>().ToList()
 
     member this.GetItem(id : int) = 

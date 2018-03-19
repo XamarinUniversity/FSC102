@@ -11,24 +11,24 @@ open Android.Runtime
 open Android.Views
 open Android.Widget
 
-[<Activity (Label = "Edit Item", Theme = "@android:style/Theme.Holo.Light")>]
+[<Activity(Label = "Edit Item", Theme = "@android:style/Theme.Holo.Light")>]
 type EditToDoActivity() =
   inherit Activity()
 
   override this.OnCreate(bundle) =
-    base.OnCreate (bundle)
+    base.OnCreate(bundle)
 
     let id = this.Intent.GetIntExtra("id", 0)
 
     let item = App.ItemManager.GetItem(id)
 
-    this.SetContentView (Resource_Layout.SingleToDoItem)
+    this.SetContentView(Resources.Layout.SingleToDoItem)
 
-    let taskName = this.FindViewById<TextView>(Resource_Id.taskName)
-    let isComplete = this.FindViewById<CheckBox>(Resource_Id.isComplete)
-    let saveButton = this.FindViewById<Button>(Resource_Id.saveButton)
-    let deleteButton = this.FindViewById<Button>(Resource_Id.deleteButton)
-    let errorMessage = this.FindViewById<TextView>(Resource_Id.errorMessage)
+    let taskName = this.FindViewById<TextView>(Resources.Id.taskName)
+    let isComplete = this.FindViewById<CheckBox>(Resources.Id.isComplete)
+    let saveButton = this.FindViewById<Button>(Resources.Id.saveButton)
+    let deleteButton = this.FindViewById<Button>(Resources.Id.deleteButton)
+    let errorMessage = this.FindViewById<TextView>(Resources.Id.errorMessage)
 
     taskName.Text <- item.Name
     isComplete.Checked <- item.IsComplete
