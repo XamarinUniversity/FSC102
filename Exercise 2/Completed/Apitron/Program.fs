@@ -8,7 +8,8 @@ open Apitron.Image2Pdf
 let main argv = 
     printfn "%A" argv
 
-    let directory = __PATH_TO_CLONED_EXERCISE_FOLDER__ + @"Assets/MonkeyPictures/"
+    // TODO: Uncomment and set your path to run this exercise.
+    let directory = (*__PATH_TO_CLONED_EXERCISE_FOLDER__ +*) @"Assets/MonkeyPictures/"
 
     let images = Directory.GetFiles directory
     //optionally, create a filtered array with only png/jpg files
