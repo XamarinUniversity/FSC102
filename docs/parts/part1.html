@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>Exercise 1: Reorder an F# project</title>
+    <link rel="stylesheet" type="text/css" href="./res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./res/styles/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="./res/styles/styles.css">
+</head>
+
+<body>
+    <!-- Use the same title as the StartHere -->
+    <header>Projects in F#</header>
+
+    <section id="main">
+
+      <h1 id="page-title"></h1>
+
+      <div id="ide-selector">
+          Select the Visual Studio environment you want to work with:&nbsp;<a href="#" data-name="xs">macOS</a>&nbsp;or&nbsp;<a href="#" data-name="vs">Windows</a>
+      </div>
+
+      <h2>Duration</h2>
+      <p>10 minutes</p>
+
+      <ide name="vs">
+      <h2>Prerequisites</h2>
+      <p>
+          Visual Studio 2017 requires a few F# components be installed to work with and create the F# projects used in these exercises. These components can be added by running the <b>Visual Studio Installer</b> found in the Windows Start menu.
+      </p>
+      <p>
+          If you have installed the <b>.NET desktop development</b> workload, you will already have the <b>F# language support</b> component. To create new F# projects using .NET Core, you will also need the <b>.NET Core cross-platform development</b> workload. To create new F# projects using the .NET Framework instead, you will need the <b>F# desktop language support</b> component as well.
+      </p>
+      </ide>
+
+      <h2>Lab goals</h2>
+      <p>
+        The primary goal of this lab is to gain a deeper understanding of how to organize code files in F#.
+        The high level goals of this activity are as follows:
+      </p>
+
+      <ol>
+        <li>
+          Open the <b>FSharpToDo</b> Android application located in the <b>Exercise 1</b> -> <b>Start</b> folder.
+          Attempt to run the application and inspect the errors; these are a result of the files being misordered.
+        </li>
+        <li>
+          Reorder the files <strong>one at a time</strong> and compile the application after each move.
+          You will notice that when files are misordered there will be a cascade effect on the errors.
+          This is due to the dependencies the files have on one another. It is important to move a file, run the application, and repeat.
+        </li>
+        <li>
+          You've completed the exercise when the app successfully compiles.
+        </li>
+      </ol>
+
+      <p><img src="res/images/fileorder.png" /></p>
+
+      <h2>Required assets</h2>
+      <p>
+        There are two F# projects in the <strong>Lab 01 Resources</strong> folder, one is the starting solution you will work to reorder,
+        and the second is a completed version of the program you can refer to at the end of the exercise to check your work.
+        Please make sure you have this folder before you begin.
+      </p>
+
+        <h1>Steps</h1>
+
+        <h2>Reorder the files in the FSharpToDo app</h2>
+        <p>Our goal is to make this app run successfully on an Android simulator or device</p>
+        <ol>
+          <li>Locate the starter project contained in the <b>Lab 01 Resources/Start</b> folder included with this exercise and open the <strong>FSharpTodo.sln</strong> file using Visual Studio.</li>
+          <li>Run the app
+
+          <ul>
+            <li>Make sure Visual Studio is set to &quot;Debug&quot; and open on an Android Player or a connected device.</li>
+            <li>After compiling the project click inspect the <b>Errors</b> window to view the build errors.<img src="res/images/errors.png" alt="Errors window showing several build errors resulting from file order issues in our F# project."/></li>
+          </ul>
+
+          <li>You will note a number of errors, look for errors, which state things like &quot;The type... is not defined&quot;, that will help clue you into which files need to be moved.
+            <ide name="xs">
+              To move a file you can click and drag it.
+            </ide>
+            <ide name="vs">
+              To move a file, select it and use <kbd>Alt</kbd>+<kbd>Up arrow</kbd> and <kbd>Alt</kbd>+<kbd>Down arrow</kbd>.
+            </ide>
+            <br><img src="res/images/fstodosln.png" alt="Solution pad of the FSharpToDo application."/>
+          </li>
+
+          <li>Repeat step 3 until the app compiles and runs correctly.
+          </li>
+        </ol>
+
+            <p>You will know you have completed the activity when the app runs in an emulator or on a device.
+            If you are unable to make it run please refer to the <b>Lab 01 Resources/Complete</b> folder to see the solution.</p>
+
+            <h1>Summary</h1>
+            <p>During this lab you have worked to gain a deeper understanding of file organization in F#. We reordered the files in an F# project to make an Android project compile successfully.</p>
+            <div class="align-right">
+              <a href="../Start%20Here.html">Go Back</a>
+            </div>
+          </li>
+        </li>
+        </ol>
+</section>
+
+    <script src="./res/js/jquery.min.js"></script>
+    <script src="./res/js/prettify.js"></script>
+    <script src="./res/js/script.js"></script>
+
+    <footer>Copyright (C) 2018 Xamarin Inc., Microsoft.</footer>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>Exercise 3: Creating a console application</title>
+    <link rel="stylesheet" type="text/css" href="./res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./res/styles/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="./res/styles/styles.css">
+</head>
+
+<body>
+    <!-- Use the same title as the StartHere -->
+    <header>Projects in F#</header>
+
+    <section id="main">
+
+      <h1 id="page-title"></h1>
+      
+      <div id="ide-selector">
+          Select the Visual Studio environment you want to work with:&nbsp;&nbsp;
+          <a href="#" data-name="xs">macOS</a>
+          or
+          <a href="#" data-name="vs">Windows</a>
+      </div>
+
+      <h2>Duration</h2>
+      <p>15 minutes</p>
+
+      <ide name="vs">
+          <h2>Prerequisites</h2>
+          <p>
+              Visual Studio 2017 requires a few F# components be installed to work with and create the F# projects used in these exercises. These components can be added by running the <b>Visual Studio Installer</b> found in the Windows Start menu.
+          </p>
+          <p>
+              If you have installed the <b>.NET desktop development</b> workload, you will already have the <b>F# language support</b> component. To create new F# projects using .NET Core, you will also need the <b>.NET Core cross-platform development</b> workload. To create new F# projects using the .NET Framework instead, you will need the <b>F# desktop language support</b> component as well.
+          </p>
+      </ide>
+
+        <h2>Lab goals</h2>
+        <p>The primary goal of this lab is to gain a deeper understanding of how to create modules
+          as well as how to organize code files in an F# project. The high level goals of this activity are as follows:</p>
+        <ol>
+          <li>Create a new console application in your IDE.</li>
+        <li>Create a new F# file which contains a <code>module</code> that includes an adding function.</li>
+          <li>In <b>Program.fs</b> you will write the functionality to call your adding module, passing in your command line arguments, and print the result to the screen.</li>
+        </ol>
+        <p>&nbsp;</p>
+      <img src="res/images/adding app.jpg" alt="REPL"/>
+
+        <h1>Steps</h1>
+        <h2>Create a new console application</h2>
+        <p>Our goal is to create a console application, which can add two or more numbers together. In order to be successful you will need to apply what we have learned about arrays, modules and F# file structure.</p>
+        <ol>
+            <li>Create a new console application
+              <ide name="vs">
+                <ul class="indent-none">
+                  <li><b>File</b> &gt; <b>New</b> &gt; <b>Project</b> &gt; <b>Visual F#</b> &gt; <b>Console Application</b> (for a .NET Framework console app) or <b>Console App (.NET Core)</b> (for a .NET Core app)</li>
+                </ul>
+              </ide>
+              <ide name="xs">
+                <ul class="indent-none">
+                  <li><b>File</b> &gt; <b>New</b> &gt; <b>Solution</b> &gt; <b>Other</b> &gt; <b>.NET</b> &gt; <b>Console Project</b>  (Make sure to change it to F# in the language dropdown before continuing.)</li>
+                </ul>
+              </ide>
+            <li>Add a new F# <strong>source file</strong> named <strong>Adding.fs</strong> and write the code to create a <a href="http://msdn.microsoft.com/en-us/library/dd233221.aspx" target="_blank">module</a>,
+              which has a <a href="http://msdn.microsoft.com/en-us/library/dd233229.aspx" target="_blank">function</a> to add two numbers together.
+<ul class="indent-none">
+        <li>The function should be named <code>AddNumbers</code> and take an array of <em>strings</em>.</li>
+                  <li>It should convert each item in the array to an integer; can you think of an<a href="http://www.google.com/url?q=http%3A%2F%2Fmsdn.microsoft.com%2Fen-us%2Flibrary%2Fee370273.aspx&sa=D&sntz=1&usg=AFQjCNH86gwc9KY1IFOKnleKrLOwpuhl8w" target="_blank">
+                    array manipulation function</a> to do this?</li>
+                  <li>It should return the sum of all the integers, is there a <a href="http://msdn.microsoft.com/en-us/library/dd233214.aspx" target="_blank">built-in array function</a>?</li>
+              </ul>
+            </li>
+      </ol>
+
+<p>
+<a href="#" onclick="toggleCode(this,'module');return false;" class="uiitem">Show Code</a>
+<div class="indent-large" id="module" style="display:none;">
+<pre class="prettyprint">
+module Adding
+
+let AddNumbers(arguments:string[]) =
+    arguments
+        |> Array.map(fun x -> (int)x)
+        |> Array.sum
+</pre>
+</div>
+</p>
+
+   Use the Adding module
+   <ol>
+     <li>In <strong>Program.fs</strong>, write the functionality to call your adding module with your command line arguments and print the result to the screen.     </li>
+<div class="hintblock">
+       If you run into an issue where your types aren't being automatically inferred you can fix this by surrounding the parameter with ( )
+       and adding :type after the parameter.</div>
+
+       <img src="res/images/types.png" alt="---- Missing Image -----" width="700"/>
+
+     <li>Remember that there is a top-down hierarchy in F#, files should be organized in order of use, not alphabetically.
+       You can move files up and down in the solution by right-clicking on the files and selecting <em>Move Up</em> or <em>Move Down</em>.<br>
+       <br>
+     </li>
+</ol>
+
+<p><div class="indent-medium">
+<a href="#" onclick="toggleBlock(this,'hint1','Hint #1', 'Hide Hint');return false;" class="uiitem">Hint #1</a>
+<div class="indent-none" id="hint1" style="display:none;">
+<div class="hintblock">
+<strong>Hint #1</strong> You will need to use <a href="http://msdn.microsoft.com/en-us/library/dd393787.aspx">Open</a> to make your module available, this is similar to <code>using</code> in C#.
+</div></div>
+
+<a href="#" onclick="toggleBlock(this,'hint2','Hint #2', 'Hide Hint');return false;" class="uiitem">Hint #2</a>
+<div class="indent-none" id="hint2" style="display:none;">
+<div class="hintblock">
+<strong>Hint #2</strong> You can pass the <code>argv</code> parameter directly into your <code>AddNumbers</code> function since it was coded to take a string array. Remember it returns an integer, so make sure your <code>printfn</code> statement uses the &quot;i&quot; type.
+</div></div>
+
+<a href="#" onclick="toggleBlock(this,'hint3','Hint #3', 'Hide Hint');return false;" class="uiitem">Hint #3</a>
+<div class="indent-none" id="hint3" style="display:none;">
+<div class="hintblock">
+<strong>Hint #3</strong> It's a good idea to check the length of the <code>argv</code> array before calling your function to ensure it has at least two values - you can use the <a href="http://msdn.microsoft.com/en-us/library/dd233231.aspx">if-then statement</a> for this.
+</div></div>
+</div></p>
+
+<p>
+<a href="#" onclick="toggleCode(this,'adding');return false;" class="uiitem">Show Code</a>
+<div class="indent-large" id="adding" style="display:none;">
+<pre class="prettyprint">
+open Adding
+
+// Learn more about F# at http://fsharp.net
+// See the 'F# Tutorial' project for more help.
+
+[&lt;EntryPoint>]
+let main argv =
+    <mark>if argv.Length >= 2 then</mark>
+    <mark>    printfn "%i" &lt;| Adding.AddNumbers argv</mark>
+    0 // return an integer exit code
+</pre>
+</div>
+</p>
+
+<ol start="3">
+  <li>
+    <p>When you run project the console should open and it will be blank. To enter the parameters to add:</p>
+    <ul>
+      <li>
+        <ide name="vs">
+          Right click on the project in the Solution Explorer and select <b>Properties</b> &gt; <b>Debug</b>.
+    
+          <div><img src="res/images/VS.png" alt="Setting project run parameters to add in Visual Studio."/></div>
+        </ide>
+        <ide name="xs">
+          Right click on the project in the Solution pad and select <b>Options</b> &gt; <b>Run</b> &gt; <b>General</b>.
+          <div><img src="res/images/xam.png" alt="Setting project run parameters to add in Visual Studio."/></div>
+        </ide>
+      </li>
+      <li>Add several numerical values separated by spaces and run the console application.
+
+        <ide name="vs">
+          <p>Note: if the command line program closes immediately before you can see the result, you can add a <code>Console.Read</code> to your app.</p>
+<pre class="prettyprint indent-large">
+[&lt;EntryPoint>]
+let main argv =
+    if argv.Length >= 2 then
+        printfn "%i" &lt;| Adding.AddNumbers argv
+    <mark>Console.Read() |> ignore</mark>
+    0 // return an integer exit code
+</pre>
+        </ide>
+
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1>Summary</h1>
+During this lab you have worked to gain a deeper understanding of modules and file organization in F#. We created an F# console application with two files, wrote the functionality of those files, and then organized them in order of use to run the application.
+      <div class="align-right">
+          <a href="../Start%20Here.html">Go Back</a>
+      </div>
+</section>
+
+    <script src="./res/js/jquery.min.js"></script>
+    <script src="./res/js/prettify.js"></script>
+    <script src="./res/js/script.js"></script>
+
+    <footer>Copyright (C) 2018 Xamarin Inc., Microsoft.</footer>
+</body>
+</html>

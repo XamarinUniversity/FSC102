@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>Exercise 2: Connect to Apitron to combine images into a PDF </title>
+    <link rel="stylesheet" type="text/css" href="./res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./res/styles/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="./res/styles/styles.css">
+</head>
+
+<body>
+    <!-- Use the same title as the StartHere -->
+    <header>Projects in F#</header>
+   
+<section id="main">
+  <h1 id="page-title"></h1>
+  <div id="ide-selector">
+      Select the Visual Studio environment you want to work with:&nbsp;&nbsp;
+      <a href="#" data-name="xs">macOS</a>
+      or
+      <a href="#" data-name="vs">Windows</a>
+  </div>
+
+  <h2>Duration</h2>
+  <p>20 minutes</p>
+
+  <ide name="vs">
+      <h2>Prerequisites</h2>
+      <p>
+          Visual Studio 2017 requires a few F# components be installed to work with and create the F# projects used in these exercises. These components can be added by running the <b>Visual Studio Installer</b> found in the Windows Start menu.
+      </p>
+      <p>
+          If you have installed the <b>.NET desktop development</b> workload, you will already have the <b>F# language support</b> component. To create new F# projects using .NET Core, you will also need the <b>.NET Core cross-platform development</b> workload. To create new F# projects using the .NET Framework instead, you will need the <b>F# desktop language support</b> component as well.
+      </p>
+  </ide>
+
+  <h2>Goals</h2>
+  <p>The primary goal of this lab is to port an existing C# code sample to F#.
+
+    Building on knowledge learned in the previous module (fundamentals of F#), we will apply what we've learned about F# project structures to create a console application and import a NuGet package.</p>
+
+  <h1>Steps</h1>
+  <h2>Create our project</h2>
+  <ol>
+    <li>Create a new console application
+        <ide name="vs">
+          <ul class="indent-none">
+            <li><b>File</b> &gt; <b>New</b> &gt; <b>Project</b> &gt; <b>Visual F#</b> &gt; <b>Console Application</b></li>
+          </ul>
+          <p>Note: these instructions will work for either a .NET Framework console app or a .NET Core console app.</p>
+        </ide>
+        <ide name="xs">
+          <ul class="indent-none">
+            <li><b>File</b> &gt; <b>New</b> &gt; <b>Solution</b> &gt; <b>Other</b> &gt; <b>.NET</b> &gt; <b>Console Project</b> (Make sure to change it to F# in the language dropdown before continuing.)</li>
+          </ul>
+        </ide>
+     </li>
+    <li>Add the <strong>Apitron.PDF.Kit</strong> package from NuGet.
+      <ide name="vs">
+          You can add the package by right-clicking on the <strong>References</strong> folder and selecting <strong> Manage NuGet Packages</strong>.
+      </ide>
+      <ide name="xs">
+          You can add the package by right-clicking on the project and selecting <strong>Add</strong> > <strong>Add Packages...</strong>.
+      </ide>
+      This is exactly the same workflow used in a C# project.</li>
+  </ol>
+
+  <h2>Convert images to a PDF</h2>
+  <p>To complete this project we will be converting a C# code sample to F# (listed below).
+    Take a moment to read through the C# code. We will then walk step-by-step through it as we convert it to F#.
+    All of our work will happen in the <strong>Program.fs</strong> file and specifically in your <code>main</code> function which is included in the project.</p>
+  <ol>
+    <li>Open <b>Program.fs</b> and add the necessary references to the project - we will need to access:
+      <ul class="indent-none">
+        <li><code>System.IO</code></li>
+        <li><code>Apitron.Image2Pdf</code></li>
+      </ul>
+    </li>
+  </ol>
+
+<p><a href="#" onclick="toggleCode(this,'add_namespaces');return false;" class="uiitem">Show Code</a>
+<div class="indent-large" id="add_namespaces" style="display:none;">
+<pre class="prettyprint">
+open System.IO
+open Apitron.Image2Pdf
+</pre></div></p>
+
+ <ol start="2">
+    <li>Determine the absolute path of your <b>Assets/MonkeyPictures</b> folder in the cloned course materials.</li>
+    <li>Next, set up a variable to store your MonkeyPictures path<br>
+<pre class="prettyprint codeblock">
+    let directory = __SOURCE_DIRECTORY__
+</pre>
+    </li>
+    <li>Using the directory path, open and load the image files<br>
+<pre class="prettyprint codeblock">
+    // open and load the image files
+    string[] images = Directory.GetFiles(directory);
+</pre>
+    </li>
+    <li>Next, you will need to define the <code>Document</code> and <code>PageSettings</code> as shown in the example C# code:
+<pre class="prettyprint codeblock">
+// open and load the image files
+string[] images = Directory.GetFiles(directory);
+
+// this object represents a PDF document
+Document document = new Document();
+
+// inialize settings object
+PageSettings settings = new PageSettings();
+settings.ScaleMode = ImageScaleMode.PreserveAspectRatio;
+settings.KeepImageOrientation = true;
+
+// process and save images to PDF one by one
+foreach (string image in images)
+{
+   document.AddImage(image, settings);
+}
+</pre>
+    </li>
+    <li>Try to work through the C# code and write the equivalent in F#.</li>
+  </ol>
+
+  <p>When creating a new instance of a class in F#, you can initialize the properties with the class creation - similar to the property constructor syntax in C#.</p>
+  <p><div class="indent-medium">
+    <a href="#" onclick="toggleBlock(this,'init_hint','Initializing a class in F#', 'Hide Hint');return false;" class="uiitem">Initializing a class in F#</a>
+    <div class="indent-medium" id="init_hint" style="display:none;">
+      <div class="hintblock">When you create an instance of a class, it's generally possible to set many of the properties at that time. For example:
+<pre class="prettyprint codeblock">
+let myclass = new Class(Property1="hello", Property2=14).
+// This avoids having to mutate the properties after creation, as you would otherwise need to do:
+let myclass = new Class()
+myclass.Property1 <- "hello"
+myclass.Property2 <- 14
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+</p>
+
+<p><div class="indent-medium">
+<a href="#" onclick="toggleBlock(this,'hint1','Hint #1', 'Hide Hint');return false;" class="uiitem">Hint #1</a>
+<div class="indent-none" id="hint1" style="display:none;">
+<div class="hintblock">
+The code in F# will parallel the code shown above in C#, start by using <code>Directory.GetFiles</code> to retrieve all the image files in your monkey folder.</div>
+</div>
+
+<a href="#" onclick="toggleBlock(this,'hint2','Hint #2', 'Hide Hint');return false;" class="uiitem">Hint #2</a>
+<div class="indent-none" id="hint2" style="display:none;">
+<div class="hintblock">
+Create the <code>Document</code> and <code>PageSettings</code> objects and assign them to a value.</div>
+</div>
+
+<a href="#" onclick="toggleBlock(this,'hint3','Hint #3', 'Hide Hint');return false;" class="uiitem">Hint #3</a>
+<div class="indent-none" id="hint3" style="display:none;">
+<div class="hintblock">
+Use the <code>Array.iter</code> function to add each image in the folder to the document, this is similar to the C# <code>foreach</code> functionality except it takes a delegate function to perform each loop iteration on.
+</div>
+</div>
+
+</div>
+</p>
+
+<p><a href="#" onclick="toggleCode(this,'emails');return false;" class="uiitem">Show Code</a>
+<div class="indent-large" id="emails" style="display:none;">
+<pre class="prettyprint">
+let images = Directory.GetFiles directory
+let document = new Document()
+let settings = new PageSettings(ScaleMode = ImageScaleMode.PreserveAspectRatio, KeepImageOrientation = true)
+
+Array.iter (fun image -> document.AddImage(image, settings)) images
+</pre>
+</div>
+</p>
+
+  <ol start="5">
+    <li>As a final step, have your new PDF saved in the MonkeyPictures folder using the <code>Document.Save</code> method, have it save the document to a file named &quot;MonkeyPictures.pdf&quot;.</li>
+  </ol>
+
+<p><a href="#" onclick="toggleCode(this,'text');return false;" class="uiitem">Show Code</a>
+<div class="indent-large" id="text" style="display:none;">
+<pre class="prettyprint">
+document.Save(directory + "MonkeyPictures.pdf")
+</pre>
+</div>
+</p>
+
+  <ol start="6">
+    <li>Run the program.</li>
+    <li>Use Explorer or Finder and examine the <code>MonkeyPictures</code> folder in your project to view the PDF.</li>
+  </ol>
+  <h1>Summary</h1>
+  <p> In this lab we have used an existing NuGet component and converted a C# example to F# to convert a set of images to a PDF.</p>
+  <div class="align-right"> <a href="../Start%20Here.html">Go Back</a> </div>
+</section>
+
+    <script src="./res/js/jquery.min.js"></script>
+    <script src="./res/js/prettify.js"></script>
+    <script src="./res/js/script.js"></script>
+
+    <footer>Copyright (C) 2018 Xamarin Inc., Microsoft.</footer>
+</body>
+</html>
